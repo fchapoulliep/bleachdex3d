@@ -1,0 +1,97 @@
+.bleach-cards {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 70%;
+  width: 100%;
+  color: white;
+  border-radius: 20px;
+  transform-style: preserve-3d;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+  transition: height 0.3s ease-in-out;
+  max-height: 550px;
+}
+
+.bleach-cards {
+  background-repeat: no-repeat;
+  background-position: center left;
+  background-size: 160%;
+}
+
+.bleach-cards.soul-society {
+  background-color: #34495e;
+  background-image: url("../assets/card-types/soul-society.svg");
+}
+
+.bleach-cards.hueco-mundo {
+  background-color: #5c5c5c;
+  background-image: url("../assets/card-types/hueco-mundo.svg");
+}
+
+.bleach-cards.karakura-town {
+  background-color: #3b5998;
+  background-image: url("../assets/card-types/karakura-town.svg");
+}
+
+.bleach-cards.wandenreich {
+  background-color: #3a3a3a;
+  background-image: url("../assets/card-types/wandenreich.svg");
+}
+
+.inner-element {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  font-style: italic;
+  color: white;
+  transform: translateZ(60px);
+  height: 100%;
+  width: 100%;
+  text-align: center;
+}
+
+.inner-element a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+.inner-element a p {
+  margin: 0;
+}
+
+.inner-element .bleach-types {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 5px;
+  font-size: 10px;
+  width: 100%;
+}
+
+.inner-element .bleach-types img {
+  width: 20px;
+  height: 20px;
+}
+
+.inner-element img.bleach-character-image {
+  width: 70%;
+  height: 65%;
+  object-fit: cover;
+}
+
+@media screen and (max-height: 600px) {
+  .inner-element img.bleach-character-image {
+    width: 45%;
+    height: 45%;
+    object-fit: cover;
+  }
+}

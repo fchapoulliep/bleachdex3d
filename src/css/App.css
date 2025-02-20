@@ -1,0 +1,48 @@
+@font-face {
+  font-family: "Hiragino";
+  src: url("../assets/fonts/Hiragino.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  font-family: "Hiragino", sans-serif;
+}
+
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+a:hover {
+  text-decoration: none;
+  font-weight: bold;
+  text-shadow: 0 0 5px #f1f1f1, 0 0 10px #f1f1f1, 0 0 15px #f1f1f1;
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: linear-gradient(#f2a30b 60px, transparent 60px);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #f2a30b;
+  border-radius: 10px;
+  border: 3px solid transparent;
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #b87800;
+}

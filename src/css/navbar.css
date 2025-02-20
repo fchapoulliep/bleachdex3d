@@ -1,0 +1,66 @@
+#navbar {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  position: fixed;
+  height: 55px;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+  color: white;
+}
+
+#navbar .navbar-bleach {
+  width: 70%;
+  height: 80%;
+  display: flex;
+  align-items: center;
+  transition: 200ms all;
+  background-color: rgba(0, 0 , 0, 0.7);
+  border-radius: 0 0 100px 100px;
+  background-image: url("../assets/icons/pattern.webp");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: bottom;
+}
+
+#navbar .navbar-bleach div {
+  width: 33.333%;
+  display: flex;
+}
+
+#navbar .navbar-bleach div:nth-child(1) {
+  justify-content: flex-end;
+}
+
+#navbar .navbar-bleach div:nth-child(2) {
+  justify-content: center;
+}
+
+#navbar .navbar-bleach div:nth-child(3) {
+  justify-content: flex-start;
+}
+
+@media screen and (max-width: 1280px) {
+  #navbar p,
+  #navbar a {
+    font-size: 13px;
+  }
+}
+
+@media screen and (max-width: 850px) {
+  #navbar .navbar-bleach {
+    width: 95%;
+    justify-content: center;
+    gap: 15px;
+  }
+
+  #navbar .navbar-bleach div {
+    width: auto;
+  }
+
+  #navbar p,
+  #navbar a {
+    font-size: 11px;
+  }
+}

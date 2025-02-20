@@ -1,0 +1,32 @@
+#slider {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+.slider-left {
+  left: 15px;
+}
+
+.slider-right {
+  right: 15px;
+}
+
+.slider-left img {
+  width: 60px;
+  transition: transform 200ms ease;
+}
+
+.slider-right img {
+  width: 60px;
+  transition: transform 200ms ease;
+}
+
+.slider-right:hover img {
+  transform: scale(1.1) translateX(5px);
+}
+
+.slider-left:hover img {
+  transform: scale(1.1) translateX(-5px);
+}

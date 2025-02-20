@@ -1,0 +1,33 @@
+.type-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#bleachdex .bleach-type {
+  display: block;
+  border-radius: 100%;
+  width: fit-content;
+  transition: 200ms all;
+  margin: 7px 0px;
+}
+
+#bleach-overlay .bleach-type {
+  height: 24px;
+  width: 24px;
+  margin: 4px 5px;
+}
+
+.type-div p {
+  margin: 0;
+  font-size: 13px;
+}
+
+.type-div img {
+  max-width: 24px;
+  max-height: 24px;
+}
+
+#bleach-overlay .type-div p {
+  font-size: 16px;
+}

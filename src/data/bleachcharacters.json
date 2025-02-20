@@ -1,0 +1,219 @@
+[
+  {
+    "name": "Aizen",
+    "id": 1,
+    "city": ["Soul Society"],
+    "description": "A former captain of the Gotei 13 who betrayed Soul Society and became the leader of the Arrancar.",
+    "type": ["Shinigami", "Arrancar"]
+  },
+  {
+    "name": "Askin Nakk Le Vaar",
+    "id": 2,
+    "city": ["Wandenreich"],
+    "description": "One of Yhwach's elite Schutzstaffel, capable of manipulating lethal doses of substances.",
+    "type": ["Quincy"]
+  },
+  {
+    "name": "Bambietta Basterbine",
+    "id": 3,
+    "city": ["Wandenreich"],
+    "description": "A Sternritter with the ability to turn anything she touches into a bomb.",
+    "type": ["Quincy"]
+  },
+  {
+    "name": "Coyote Stark",
+    "id": 4,
+    "city": ["Hueco Mundo"],
+    "description": "The Primera Espada, possessing immense power and loneliness that led to his unique abilities.",
+    "type": ["Arrancar"]
+  },
+  {
+    "name": "Grimmjow",
+    "id": 5,
+    "city": ["Hueco Mundo"],
+    "description": "The Sexta Espada, known for his brutal fighting style and rivalry with Ichigo.",
+    "type": ["Arrancar"]
+  },
+  {
+    "name": "Grimmjow (Beast Form)",
+    "id": 6,
+    "city": ["Hueco Mundo"],
+    "description": "Grimmjow in his released form, resembling a panther.",
+    "type": ["Arrancar"]
+  },
+  {
+    "name": "Ichibe Hyosube",
+    "id": 7,
+    "city": ["Soul Society"],
+    "description": "The leader of the Royal Guard, possessing the ability to manipulate names and meanings.",
+    "type": ["Shinigami"]
+  },
+  {
+    "name": "Jugram Haschwalth",
+    "id": 8,
+    "city": ["Wandenreich"],
+    "description": "Yhwach's right-hand man and the Grandmaster of the Sternritter.",
+    "type": ["Quincy"]
+  },
+  {
+    "name": "Jushiro Ukitake",
+    "id": 9,
+    "city": ["Soul Society"],
+    "description": "The captain of the 13th Division, known for his wisdom and illness.",
+    "type": ["Shinigami"]
+  },
+  {
+    "name": "Kenpachi Zaraki",
+    "id": 10,
+    "city": ["Soul Society"],
+    "description": "The captain of the 11th Division, a fearsome warrior who seeks only battle.",
+    "type": ["Shinigami"]
+  },
+  {
+    "name": "Kirio Hikifune",
+    "id": 11,
+    "city": ["Soul Society"],
+    "description": "A Royal Guard member who specializes in food-based reiatsu enhancement.",
+    "type": ["Shinigami"]
+  },
+  {
+    "name": "Kirio Hikifune (Spoon)",
+    "id": 12,
+    "city": ["Soul Society"],
+    "description": "Kirio in her alternate form, wielding a cooking spoon as a weapon.",
+    "type": ["Shinigami"]
+  },
+  {
+    "name": "Kugo Ginjo",
+    "id": 13,
+    "city": ["Karakura Town"],
+    "description": "The leader of Xcution, a group of Fullbringers who opposed Soul Society.",
+    "type": ["Fullbringer"]
+  },
+  {
+    "name": "Nelliel",
+    "id": 14,
+    "city": ["Hueco Mundo"],
+    "description": "A former Espada, known for her kind nature and immense strength.",
+    "type": ["Arrancar"]
+  },
+  {
+    "name": "Nelliel (Beast Form)",
+    "id": 15,
+    "city": ["Hueco Mundo"],
+    "description": "Nelliel in her released form, taking on a centaur-like appearance.",
+    "type": ["Arrancar"]
+  },
+  {
+    "name": "Oetsu Nimaiya",
+    "id": 16,
+    "city": ["Soul Society"],
+    "description": "The Royal Guard member who forges the Zanpakuto of the Shinigami.",
+    "type": ["Shinigami"]
+  },
+  {
+    "name": "Orihime Inoue",
+    "id": 17,
+    "city": ["Karakura Town"],
+    "description": "A human with powerful healing and defensive abilities granted by her spiritual powers.",
+    "type": ["Human"]
+  },
+  {
+    "name": "Retsu Unohana",
+    "id": 18,
+    "city": ["Soul Society"],
+    "description": "The former captain of the 4th Division, secretly the first Kenpachi and a master of combat and healing.",
+    "type": ["Shinigami"]
+  },
+  {
+    "name": "Retsu Unohana (Beach)",
+    "id": 19,
+    "city": ["Soul Society"],
+    "description": "Unohana in a casual beach setting, showcasing her serene side.",
+    "type": ["Shinigami"]
+  },
+  {
+    "name": "Shunsui Kyoraku",
+    "id": 20,
+    "city": ["Soul Society"],
+    "description": "The captain-commander of the Gotei 13, known for his laid-back demeanor and deadly Zanpakuto abilities.",
+    "type": ["Shinigami"]
+  },
+  {
+    "name": "Tenjiro Kirinji",
+    "id": 21,
+    "city": ["Soul Society"],
+    "description": "A Royal Guard member known as the 'Hot Spring Demon' for his healing techniques.",
+    "type": ["Shinigami"]
+  },
+  {
+    "name": "Tenjiro Kirinji (Guitarist)",
+    "id": 22,
+    "city": ["Soul Society"],
+    "description": "An alternate form of Kirinji where he wields a guitar instead of his usual weapons.",
+    "type": ["Shinigami"]
+  },
+  {
+    "name": "Sajin Komamura (Bankai)",
+    "id": 23,
+    "city": ["Soul Society"],
+    "description": "The captain of the 7th Division, using his giant armored Bankai.",
+    "type": ["Shinigami"]
+  },
+  {
+    "name": "Sajin Komamura (Human)",
+    "id": 24,
+    "city": ["Soul Society"],
+    "description": "Komamura in his human form after abandoning his armor.",
+    "type": ["Shinigami"]
+  },
+  {
+    "name": "Senjumaru Shutara",
+    "id": 25,
+    "city": ["Soul Society"],
+    "description": "A Royal Guard member, known for her intricate weaving techniques.",
+    "type": ["Shinigami"]
+  },
+  {
+    "name": "Senjumaru Shutara (Bankai)",
+    "id": 26,
+    "city": ["Soul Society"],
+    "description": "Senjumaru using her powerful Bankai.",
+    "type": ["Shinigami"]
+  },
+  {
+    "name": "Tenjiro Kirinji",
+    "id": 27,
+    "city": ["Soul Society"],
+    "description": "A Royal Guard member, known for his hot springs healing techniques.",
+    "type": ["Shinigami"]
+  },
+  {
+    "name": "Tenjiro Kirinji (Guitarist)",
+    "id": 28,
+    "city": ["Soul Society"],
+    "description": "Kirinji in his alternate look wielding a guitar.",
+    "type": ["Shinigami"]
+  },
+  {
+    "name": "Tia Harribel",
+    "id": 29,
+    "city": ["Hueco Mundo"],
+    "description": "The Tercera Espada, known for her water-based attacks.",
+    "type": ["Arrancar"]
+  },
+  {
+    "name": "White",
+    "id": 30,
+    "city": ["Hueco Mundo"],
+    "description": "A Hollow created by Aizen, later merging with Ichigo.",
+    "type": ["Hollow"]
+  },
+  {
+    "name": "Yoruichi Shihouin",
+    "id": 31,
+    "city": ["Soul Society"],
+    "description": "The former captain of the 2nd Division, known for her incredible speed and ability to transform into a cat.",
+    "type": ["Shinigami"]
+  }
+]
