@@ -16,12 +16,8 @@
   display: flex;
   align-items: center;
   transition: 200ms all;
-  background-color: rgba(0, 0 , 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.7);
   border-radius: 0 0 100px 100px;
-  background-image: url("../assets/icons/pattern.webp");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: bottom;
 }
 
 #navbar .navbar-bleach div {
@@ -50,9 +46,8 @@
 
 @media screen and (max-width: 850px) {
   #navbar .navbar-bleach {
-    width: 95%;
-    justify-content: center;
-    gap: 15px;
+    width: 80%;
+    justify-content: space-evenly;
   }
 
   #navbar .navbar-bleach div {

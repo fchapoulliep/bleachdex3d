@@ -5,8 +5,8 @@ import React, { useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import "../css/slider.css";
 
-import leftArrow from "../assets/arrows/arrowLeft.webp";
-import rightArrow from "../assets/arrows/arrowRight.webp";
+import leftArrow from "../assets/arrows/leftArrow.webp";
+import rightArrow from "../assets/arrows/rightArrow.webp";
 
 /**
  * Props for the Slider component.

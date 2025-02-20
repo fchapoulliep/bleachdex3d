@@ -31,10 +31,6 @@
   transition: 200ms all;
   padding-bottom: 4px;
   background-color: rgba(0, 0 , 0, 0.7);
-  background-image: url("../assets/icons/pattern.webp");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: top;
 }
 
 #bleach-overlay .bleach-description h2 {
@@ -64,10 +60,6 @@
   padding-right: 20px;
   z-index: 1;
   background-color: rgba(0, 0 , 0, 0.7);
-  background-image: url("../assets/icons/pattern.webp");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
 }
 
 @media (max-width: 850px) {

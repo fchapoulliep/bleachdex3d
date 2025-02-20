@@ -166,7 +166,7 @@ const BleachCharacter: React.FC<BleachProps> = ({ bleachId }) => {
           .toLowerCase()
           .replace(/ /g, "-")
           .replace("'s", "")}.webp)`,
-        backgroundPosition: "bottom",
+        backgroundPosition: "center",
         backgroundSize: "cover",
       }}
     >
