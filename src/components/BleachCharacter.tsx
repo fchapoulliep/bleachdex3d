@@ -94,7 +94,7 @@ const BleachModel: React.FC<BleachModelProps> = ({ modelPath }) => {
           target={[0, 0, 0]}
           autoRotate
           minDistance={minZoomDistance}
-          maxDistance={3}
+          maxDistance={5}
         />
       </Bounds>
     </group>
