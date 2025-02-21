@@ -31,6 +31,10 @@
   transition: 200ms all;
   padding-bottom: 4px;
   background-color: rgba(0, 0 , 0, 0.7);
+  background-image: url("../assets/icons/pattern.webp");
+  background-size: 120%;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 #bleach-overlay .bleach-description h2 {
