@@ -182,18 +182,18 @@
     "type": ["Shinigami"]
   },
   {
-    "name": "Tenjiro Kirinji",
+    "name": "Toshiro Hitsugaya",
     "id": 27,
     "city": ["Soul Society"],
-    "description": "A Royal Guard member, known for his hot springs healing techniques.",
+    "description": "The captain of the 10th Division and the youngest captain of the Gotei 13, master of the ice dragon Hyorinmaru.",
     "type": ["Shinigami"]
   },
   {
-    "name": "Tenjiro Kirinji (Guitarist)",
+    "name": "Uryu Ishida",
     "id": 28,
-    "city": ["Soul Society"],
-    "description": "Kirinji in his alternate look wielding a guitar.",
-    "type": ["Shinigami"]
+    "city": ["Karakura Town"],
+    "description": "A Quincy, Ichigo's friend and rival, who fights with a bow made of spirit energy.",
+    "type": ["Quincy"]
   },
   {
     "name": "Tia Harribel",
