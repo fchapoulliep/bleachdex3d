@@ -1,5 +1,5 @@
 // BleachLayout.tsx
-import React from "react";
+import React, { useEffect } from "react";
 import NavBar from "./NavBar";
 import Slider from "./Slider";
 import { useParams } from "react-router-dom";
@@ -15,21 +15,28 @@ const lastId = String(Math.max(...bleachList.map((c) => c.id)));
  *
  * The component includes:
  * - A `NavBar` component at the top.
- * - A `Slider` component with direction "left" if the `bleachId` is not "1".
+ * - A `Slider` component with direction "left" if the character exists and the `bleachId` is not "1".
  * - A `BleachCharacter` component that displays the Character based on the `bleachId` or a default ID if `bleachId` is not available.
- * - A `Slider` component with direction "right" if the `bleachId` is not the last character's id.
+ * - A `Slider` component with direction "right" if the character exists and is not the last one.
  *
  * @returns {JSX.Element} The rendered layout for the Bleach Character page.
  */
 const BleachLayout: React.FC = () => {
   const { bleachId } = useParams<{ bleachId: string }>();
+  const character = bleachList.find((c) => c.id === Number(bleachId));
 
+  // The tab title follows in-app navigation; the built page of each character already has it.
+  useEffect(() => {
+    document.title = character ? `${character.name} | BleachDex 3D` : "BleachDex 3D";
+  }, [character]);
+
+  // No arrows on an unknown id: they would lead to other unknown ids.
   return (
     <>
       <NavBar />
-      {bleachId !== "1" && <Slider direction="left" />}
+      {character && bleachId !== "1" && <Slider direction="left" />}
       <BleachCharacter bleachId={bleachId || "defaultId"} />
-      {bleachId !== lastId && <Slider direction="right" />}
+      {character && bleachId !== lastId && <Slider direction="right" />}
     </>
   );
 };

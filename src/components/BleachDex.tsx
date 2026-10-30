@@ -36,6 +36,11 @@ const BleachDex: React.FC = () => {
   const [searchQuery, setSearchQuery] = React.useState("");
   const [selectedType, setSelectedType] = React.useState("");
 
+  // Back on the list after a character page, the tab title goes back to the site name.
+  React.useEffect(() => {
+    document.title = "BleachDex 3D";
+  }, []);
+
   /**
    * handleInput function that filters the Bleach Characters list based on the search query.
    */
