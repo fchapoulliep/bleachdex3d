@@ -44,7 +44,9 @@ interface BleachModelProps {
  */
 const BleachModel: React.FC<BleachModelProps> = ({ modelPath, onReady }) => {
   const { scene, animations } = useGLTF(modelPath);
-  const mixer = new THREE.AnimationMixer(scene);
+  // One mixer per model: created on every render, it restarted the animation
+  // each time the page changed state (loader, description), hence the jolts
+  const mixer = useMemo(() => new THREE.AnimationMixer(scene), [scene]);
   const frames = useRef(0);
   const [minZoomDistance, setMinZoomDistance] = React.useState(0);
 
