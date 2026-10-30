@@ -13,7 +13,7 @@ import {
 import bleachList from "../data/bleachcharacters.json";
 import Loader from "./Loader";
 import * as THREE from "three";
-import "../css/BleachCharacter.css";
+import "../css/bleachcharacter.css";
 import BleachType from "./BleachType";
 import { Link } from "react-router-dom";
 
