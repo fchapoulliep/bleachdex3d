@@ -46,6 +46,17 @@
   margin: 5px 0;
 }
 
+#bleach-overlay .description-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Only shown on phones, where the description folds into a bar */
+#bleach-overlay .description-toggle {
+  display: none;
+}
+
 #bleach-overlay .bleach-types {
   position: absolute;
   right: 0%;
@@ -78,5 +89,76 @@
   #bleach-overlay .bleach-types img {
     width: 16px;
     height: 16px;
+  }
+}
+
+/* Phones: the description folds into a bar with the name; the toggle opens it upwards */
+@media (max-width: 768px) {
+  #bleach-overlay .bleach-description {
+    box-sizing: border-box;
+    min-width: 0;
+    /* Kept clear of the type panel, which can take 40% plus its 40px of padding */
+    max-width: calc(60% - 48px);
+    padding: 4px 8px 4px 10px;
+  }
+
+  /* The head spans the panel, so that the chevron stays on the right once open */
+  #bleach-overlay .description-head {
+    align-self: stretch;
+  }
+
+  #bleach-overlay .description-head h2 {
+    margin: 0;
+  }
+
+  #bleach-overlay .description-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    margin-left: auto;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: #fff;
+    cursor: pointer;
+    pointer-events: auto;
+  }
+
+  /* The whole bar answers the tap, not only the chevron */
+  #bleach-overlay .description-toggle::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+  }
+
+  #bleach-overlay .description-toggle svg {
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: transform 200ms;
+  }
+
+  #bleach-overlay .bleach-description.open .description-toggle svg {
+    transform: rotate(180deg);
+  }
+
+  #bleach-overlay .description-details {
+    display: none;
+  }
+
+  #bleach-overlay .bleach-description.open .description-details {
+    display: block;
+  }
+
+  /* Open, the panel stays above the rest of the scene */
+  #bleach-overlay .bleach-description.open {
+    z-index: 2;
   }
 }
