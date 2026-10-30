@@ -59,3 +59,27 @@
     font-size: 11px;
   }
 }
+
+/* Smaller screens: a three-column grid keeps the clock at the exact center,
+   whatever the length of the two links around it */
+@media screen and (max-width: 850px) {
+  #navbar .navbar-bleach {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 10px;
+  }
+
+  #navbar .navbar-bleach div {
+    width: auto;
+  }
+}
+
+/* Small phones: the serif labels broke over two lines in their column */
+@media screen and (max-width: 480px) {
+  #navbar .navbar-bleach p,
+  #navbar .navbar-bleach a {
+    font-size: 11px;
+    white-space: nowrap;
+  }
+}
