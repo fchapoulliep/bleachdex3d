@@ -1,7 +1,7 @@
 /**
  * Importing React, the Loader component, the BleachType component, and the Link component.
  */
-import React, { Suspense, useEffect, useLayoutEffect, useMemo, useRef } from "react";
+import React, { Suspense, useEffect, useMemo, useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import { Canvas } from "@react-three/fiber";
 import {
@@ -29,9 +29,21 @@ interface BleachProps {
  */
 interface BleachModelProps {
   modelPath: string;
+  /** Comes forward from far behind its place, rather than showing up in place. */
+  comesForward: boolean;
   /** Called once the model is drawn and its framing has settled. */
   onReady: () => void;
 }
+
+/** How long the model takes to come forward to its place, in seconds. */
+const ENTRANCE_S = 0.5;
+
+/**
+ * How far behind its place the model starts, in camera distances: the camera
+ * distance depends on the model's size (Bounds fit, clamped by the controls),
+ * and 4 more puts it 5 times as far, so it first shows at a fifth of its size.
+ */
+const ENTRANCE_DEPTH = 4;
 
 /**
  * Component that renders a 3D model of a Bleach Character using the provided model path and Character ID.
@@ -42,12 +54,19 @@ interface BleachModelProps {
  * @param {string} props.modelPath - The path to the 3D model file.
  * @returns {JSX.Element} The rendered 3D model of the Bleach Character.
  */
-const BleachModel: React.FC<BleachModelProps> = ({ modelPath, onReady }) => {
+const BleachModel: React.FC<BleachModelProps> = ({
+  modelPath,
+  comesForward,
+  onReady,
+}) => {
   const { scene, animations } = useGLTF(modelPath);
   // One mixer per model: created on every render, it restarted the animation
   // each time the page changed state (loader, description), hence the jolts
   const mixer = useMemo(() => new THREE.AnimationMixer(scene), [scene]);
   const frames = useRef(0);
+  const group = useRef<THREE.Group>(null);
+  const controls = useRef<React.ElementRef<typeof OrbitControls>>(null);
+  const entrance = useRef<{ from: THREE.Vector3; elapsed: number } | null>(null);
   const [minZoomDistance, setMinZoomDistance] = React.useState(0);
 
   useEffect(() => {
@@ -68,13 +87,30 @@ const BleachModel: React.FC<BleachModelProps> = ({ modelPath, onReady }) => {
     };
   }, [animations, mixer, scene]);
 
-  useFrame((_, delta) => {
+  useFrame(({ camera }, delta) => {
     mixer.update(delta);
     // A few frames let the framing settle (centering, scale, camera fit): only
-    // then is the model shown, so that it never jumps or glides into place.
+    // then is the model shown, coming forward from far behind its place.
     frames.current += 1;
     if (frames.current === 5) {
+      if (comesForward) {
+        // Along the line of sight, from the orbit target to the camera, so that
+        // the far-away model stands right behind the loader
+        const target = controls.current?.target ?? new THREE.Vector3();
+        const from = camera.position.clone().sub(target).multiplyScalar(-ENTRANCE_DEPTH);
+        entrance.current = { from, elapsed: 0 };
+      }
       onReady();
+    }
+
+    const move = entrance.current;
+    if (move && group.current) {
+      // A long first frame (shader compilation) must not skip half the move
+      move.elapsed = Math.min(move.elapsed + Math.min(delta, 1 / 30), ENTRANCE_S);
+      const progress = move.elapsed / ENTRANCE_S;
+      // Fast at first, then slows down to settle in place
+      const eased = 1 - Math.pow(1 - progress, 3);
+      group.current.position.copy(move.from).multiplyScalar(1 - eased);
     }
   });
 
@@ -100,9 +136,14 @@ const BleachModel: React.FC<BleachModelProps> = ({ modelPath, onReady }) => {
     <group>
       {/* The camera frames the model at once rather than gliding to it */}
       <Bounds fit clip observe margin={1.2} maxDuration={0.001}>
-        <primitive object={scene} />
+        {/* Moved by the entrance: it holds the model only, since the camera
+            would otherwise move along with it */}
+        <group ref={group}>
+          <primitive object={scene} />
+        </group>
         <PerspectiveCamera makeDefault position={[0, 10, 50]} />
         <OrbitControls
+          ref={controls}
           enableDamping
           dampingFactor={0.25}
           enableRotate
@@ -117,13 +158,16 @@ const BleachModel: React.FC<BleachModelProps> = ({ modelPath, onReady }) => {
 };
 
 /**
- * Models drawn during this visit. drei keeps them in memory, so they come back
- * at once and need no loader.
+ * Models drawn during this visit. drei keeps them in memory: they show up in
+ * place at once, without coming forward again.
  */
 const seenModels = new Set<string>();
 
-/** How long the loader stays at least, for a model not seen yet. */
-const LOADER_MIN_MS = 1000;
+/**
+ * How long a model may take to show before the loader appears: a quick one,
+ * such as a model already seen during the visit, needs none.
+ */
+const LOADER_DELAY_MS = 150;
 
 /**
  *  Component that renders a Bleach Character page with a 3D model, description, and type information.
@@ -143,36 +187,28 @@ const BleachCharacter: React.FC<BleachProps> = ({ bleachId }) => {
     [bleachcharacterName]
   );
 
-  // The loader follows the model rather than a fixed delay. A model not seen
-  // yet shows it at once and for at least LOADER_MIN_MS, so that a quick load
-  // reads as a transition rather than a black flash; a model already seen
-  // during the visit is still in memory and shows up without it.
+  // The loader stands where the model will appear, and only once the model
+  // has taken more than LOADER_DELAY_MS to show.
   const [loaderPhase, setLoaderPhase] = React.useState<
     "visible" | "closing" | "hidden"
-  >("visible");
+  >("hidden");
   const [drawnPath, setDrawnPath] = React.useState<string | null>(null);
   const [descriptionOpen, setDescriptionOpen] = React.useState(false);
   const modelDrawn = drawnPath === modelPath;
-  const loaderShownAt = useRef(performance.now());
+  // Decided once per model, before the effect below marks it as seen
+  const comesForward = useMemo(() => !seenModels.has(modelPath), [modelPath]);
 
-  useLayoutEffect(() => {
-    if (seenModels.has(modelPath)) {
-      setLoaderPhase("hidden");
-      return;
-    }
-    loaderShownAt.current = performance.now();
-    setLoaderPhase("visible");
-  }, [modelPath]);
+  useEffect(() => {
+    if (modelDrawn) return;
+    const timer = setTimeout(() => setLoaderPhase("visible"), LOADER_DELAY_MS);
+    return () => clearTimeout(timer);
+  }, [modelDrawn, modelPath]);
 
   useEffect(() => {
     if (!modelDrawn) return;
     seenModels.add(modelPath);
-    const elapsed = performance.now() - loaderShownAt.current;
-    const timer = setTimeout(
-      () => setLoaderPhase((phase) => (phase === "visible" ? "closing" : phase)),
-      Math.max(0, LOADER_MIN_MS - elapsed),
-    );
-    return () => clearTimeout(timer);
+    // The loader fades out while the model comes forward
+    setLoaderPhase((phase) => (phase === "visible" ? "closing" : phase));
   }, [modelDrawn, modelPath]);
 
   if (!bleachcharacter) {
@@ -257,6 +293,7 @@ const BleachCharacter: React.FC<BleachProps> = ({ bleachId }) => {
         <Suspense fallback={null}>
           <BleachModel
             modelPath={modelPath}
+            comesForward={comesForward}
             onReady={() => setDrawnPath(modelPath)}
           />
         </Suspense>
