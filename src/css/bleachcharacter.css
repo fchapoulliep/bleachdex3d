@@ -9,6 +9,24 @@
   justify-content: center;
   pointer-events: none;
   overflow: hidden;
+  /* Seen until the city background has fully loaded */
+  background-color: #111;
+}
+
+/* A city background, added once fully loaded (so that it never paints in
+   strips): it fades in over the previous one */
+#bleach-overlay .bleach-background {
+  position: absolute;
+  inset: 0;
+  background-position: center;
+  background-size: cover;
+  animation: backgroundIn 500ms ease-out;
+}
+
+@keyframes backgroundIn {
+  from {
+    opacity: 0;
+  }
 }
 
 #bleach-overlay .bleach-description {
