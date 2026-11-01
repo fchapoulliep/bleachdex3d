@@ -1,13 +1,14 @@
 /**
  * Importing React, the Loader component, the BleachType component, and the Link component.
  */
-import React, { Suspense, useEffect, useMemo, useRef } from "react";
-import { useFrame } from "@react-three/fiber";
+import React, { Suspense, useEffect, useLayoutEffect, useMemo, useRef } from "react";
+import { useFrame, useThree } from "@react-three/fiber";
 import { Canvas } from "@react-three/fiber";
 import {
   Bounds,
   OrbitControls,
   PerspectiveCamera,
+  useBounds,
   useGLTF,
 } from "@react-three/drei";
 import bleachList from "../data/bleachcharacters.json";
@@ -46,6 +47,34 @@ const ENTRANCE_S = 0.5;
 const ENTRANCE_DEPTH = 4;
 
 /**
+ * Frames the model again when the canvas size or the camera changes, as
+ * Bounds' `observe` would, but never during the entrance: measured while the
+ * model is still far behind, the framing would throw the camera off. A change
+ * meanwhile is applied once the model is in place.
+ */
+const FitWhenInPlace: React.FC<{ entering: React.MutableRefObject<boolean> }> = ({
+  entering,
+}) => {
+  const bounds = useBounds();
+  const size = useThree((state) => state.size);
+  const camera = useThree((state) => state.camera);
+  const pending = useRef(false);
+
+  useLayoutEffect(() => {
+    pending.current = true;
+  }, [bounds, size, camera]);
+
+  useFrame(() => {
+    if (pending.current && !entering.current) {
+      pending.current = false;
+      bounds.refresh().reset().fit().clip();
+    }
+  });
+
+  return null;
+};
+
+/**
  * Component that renders a 3D model of a Bleach Character using the provided model path and Character ID.
  * It handles loading the model, playing idle animations, and adjusting the model's scale and materials.
  *
@@ -67,6 +96,7 @@ const BleachModel: React.FC<BleachModelProps> = ({
   const group = useRef<THREE.Group>(null);
   const controls = useRef<React.ElementRef<typeof OrbitControls>>(null);
   const entrance = useRef<{ from: THREE.Vector3; elapsed: number } | null>(null);
+  const entering = useRef(false);
   const [minZoomDistance, setMinZoomDistance] = React.useState(0);
 
   useEffect(() => {
@@ -99,6 +129,7 @@ const BleachModel: React.FC<BleachModelProps> = ({
         const target = controls.current?.target ?? new THREE.Vector3();
         const from = camera.position.clone().sub(target).multiplyScalar(-ENTRANCE_DEPTH);
         entrance.current = { from, elapsed: 0 };
+        entering.current = true;
       }
       onReady();
     }
@@ -111,6 +142,7 @@ const BleachModel: React.FC<BleachModelProps> = ({
       // Fast at first, then slows down to settle in place
       const eased = 1 - Math.pow(1 - progress, 3);
       group.current.position.copy(move.from).multiplyScalar(1 - eased);
+      entering.current = progress < 1;
     }
   });
 
@@ -134,8 +166,10 @@ const BleachModel: React.FC<BleachModelProps> = ({
 
   return (
     <group>
-      {/* The camera frames the model at once rather than gliding to it */}
-      <Bounds fit clip observe margin={1.2} maxDuration={0.001}>
+      {/* The camera frames the model at once rather than gliding to it. Bounds
+          frames it on mount; FitWhenInPlace takes over its observe option */}
+      <Bounds fit clip margin={1.2} maxDuration={0.001}>
+        <FitWhenInPlace entering={entering} />
         {/* Moved by the entrance: it holds the model only, since the camera
             would otherwise move along with it */}
         <group ref={group}>
