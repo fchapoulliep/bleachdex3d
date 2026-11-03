@@ -47,27 +47,65 @@ const ENTRANCE_S = 0.5;
 const ENTRANCE_DEPTH = 4;
 
 /**
- * Frames the model again when the canvas size or the camera changes, as
- * Bounds' `observe` would, but never during the entrance: measured while the
- * model is still far behind, the framing would throw the camera off. A change
- * meanwhile is applied once the model is in place.
+ * Bounds' margin around the framed box: the character fills about 76 % of the
+ * view's height (1.2 left it at about 70 %, and less with a long weapon; 1.05
+ * and 1.13 were a little too close).
  */
-const FitWhenInPlace: React.FC<{ entering: React.MutableRefObject<boolean> }> = ({
-  entering,
-}) => {
+const FRAME_MARGIN = 1.18;
+
+/**
+ * The box to frame: measured on the pose the model holds now (a skinned mesh
+ * keeps the bounds of its rest pose, where the objects stand beside the
+ * character), a cube as tall as the character and wide enough for what it
+ * holds as it turns, centred on the orbit's target. Framing the largest of
+ * height, width and depth, as Bounds does, made a character with a long
+ * weapon small; a cube keeps the framing the same whichever way it faces.
+ * The model is centred again on the height of that pose.
+ */
+const poseBox = (model: THREE.Object3D, aspect: number): THREE.Box3 => {
+  model.updateMatrixWorld(true);
+  model.traverse((object) => {
+    const mesh = object as THREE.SkinnedMesh;
+    if (mesh.isSkinnedMesh) {
+      mesh.computeBoundingBox();
+    }
+  });
+  const box = new THREE.Box3().setFromObject(model);
+  const center = box.getCenter(new THREE.Vector3());
+  model.position.y -= center.y;
+  const size = box.getSize(new THREE.Vector3());
+  const across = Math.max(size.x, size.z);
+  const half = Math.max(size.y, across / Math.max(aspect, 1e-3)) / 2;
+  return new THREE.Box3(new THREE.Vector3(-half, -half, -half), new THREE.Vector3(half, half, half));
+};
+
+/**
+ * Frames the model on the pose it holds (poseBox), once its clip has posed it
+ * and again when the canvas size or the camera changes, as Bounds' `observe`
+ * would, but never during the entrance: measured while the model is still far
+ * behind, the framing would throw the camera off. A change meanwhile is
+ * applied once the model is in place.
+ */
+const FitWhenInPlace: React.FC<{
+  entering: React.MutableRefObject<boolean>;
+  model: THREE.Object3D;
+}> = ({ entering, model }) => {
   const bounds = useBounds();
   const size = useThree((state) => state.size);
   const camera = useThree((state) => state.camera);
   const pending = useRef(false);
+  const frames = useRef(0);
 
   useLayoutEffect(() => {
     pending.current = true;
-  }, [bounds, size, camera]);
+  }, [bounds, size, camera, model]);
 
   useFrame(() => {
-    if (pending.current && !entering.current) {
+    frames.current += 1;
+    // From the third frame on, the clip has put the model in its pose
+    if (pending.current && !entering.current && frames.current > 2) {
       pending.current = false;
-      bounds.refresh().reset().fit().clip();
+      bounds.refresh(poseBox(model, size.width / size.height)).reset().fit().clip();
     }
   });
 
@@ -168,8 +206,8 @@ const BleachModel: React.FC<BleachModelProps> = ({
     <group>
       {/* The camera frames the model at once rather than gliding to it. Bounds
           frames it on mount; FitWhenInPlace takes over its observe option */}
-      <Bounds fit clip margin={1.2} maxDuration={0.001}>
-        <FitWhenInPlace entering={entering} />
+      <Bounds fit clip margin={FRAME_MARGIN} maxDuration={0.001}>
+        <FitWhenInPlace entering={entering} model={scene} />
         {/* Moved by the entrance: it holds the model only, since the camera
             would otherwise move along with it */}
         <group ref={group}>
