@@ -29,8 +29,12 @@ const NavBar: React.FC = () => {
   return (
     <nav id="navbar">
       <div className="navbar-bleach">
+        {/* Phones show the short labels: the long ones overflowed the bar */}
         <div className="navbar-link">
-          <Link to="/">Back to the BleachDex</Link>
+          <Link to="/" aria-label="Back to the BleachDex">
+            <span className="label-long">Back to the BleachDex</span>
+            <span className="label-short" aria-hidden="true">← BleachDex</span>
+          </Link>
         </div>
         <div className="navbar-time">{time}</div>
         <div className="navbar-link">
@@ -38,8 +42,10 @@ const NavBar: React.FC = () => {
             href="https://fchapoulliep.github.io/portfolio/"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="Creator's portfolio"
           >
-            Creator's portfolio
+            <span className="label-long">Creator's portfolio</span>
+            <span className="label-short" aria-hidden="true">Portfolio</span>
           </a>
         </div>
       </div>
