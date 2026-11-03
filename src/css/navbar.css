@@ -37,10 +37,6 @@
   justify-content: flex-start;
 }
 
-#navbar .label-short {
-  display: none;
-}
-
 @media screen and (max-width: 1280px) {
   #navbar p,
   #navbar a {
@@ -79,25 +75,47 @@
   }
 }
 
-/* Small phones: the serif labels broke over two lines in their column, then
-   overflowed the bar's rounded ends (iPhone 14): short labels, a wider bar
-   with room at its ends, the clock on one line */
+/* Small phones: the serif labels broke over two lines in their column */
 @media screen and (max-width: 480px) {
-  #navbar .navbar-bleach {
-    width: 92%;
-    padding: 0 22px;
-    box-sizing: border-box;
-    gap: 14px;
-  }
-
   #navbar .navbar-bleach p,
   #navbar .navbar-bleach a {
-    font-size: 12px;
+    font-size: 11px;
     white-space: nowrap;
   }
+}
 
+/* Phones: the same bar on every dex (it overflowed on an iPhone 14). Short
+   labels (the dex's name already reads as the way home), the same bar and
+   font sizes, the three items evenly spaced */
+#navbar .label-short {
+  display: none;
+}
+
+@media screen and (max-width: 480px) {
+  #navbar {
+    height: 52px;
+  }
+
+  #navbar .navbar-bleach {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 92%;
+    height: 44px;
+    padding: 0 18px;
+    box-sizing: border-box;
+    gap: 0;
+  }
+
+  #navbar .navbar-bleach > div:nth-child(n) {
+    display: flex;
+    width: auto;
+  }
+
+  #navbar .navbar-bleach a,
+  #navbar .navbar-bleach p,
   #navbar .navbar-time {
-    font-size: 13px;
+    font-size: 12px;
     white-space: nowrap;
   }
 

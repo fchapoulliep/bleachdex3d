@@ -33,7 +33,7 @@ const NavBar: React.FC = () => {
         <div className="navbar-link">
           <Link to="/" aria-label="Back to the BleachDex">
             <span className="label-long">Back to the BleachDex</span>
-            <span className="label-short" aria-hidden="true">← BleachDex</span>
+            <span className="label-short" aria-hidden="true">BleachDex</span>
           </Link>
         </div>
         <div className="navbar-time">{time}</div>
