@@ -102,7 +102,7 @@ const BleachDex: React.FC = () => {
           href={`${import.meta.env.BASE_URL}`}
           style={{ height: "100%", display: "flex", alignItems: "center" }}
         >
-          <img src={bleachLogo} alt="Mario Logo" style={{ width: "100px" }} />
+          <img src={bleachLogo} alt="Bleach Logo" style={{ width: "100px" }} />
         </a>
         <search id="search-bar">
           <input
