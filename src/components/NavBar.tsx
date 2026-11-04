@@ -28,7 +28,8 @@ const NavBar: React.FC = () => {
 
   return (
     <nav id="navbar">
-      <div className="navbar-bleach">
+      {/* data-nosnippet: the clock and the links are no text for Google to quote */}
+      <div className="navbar-bleach" data-nosnippet>
         {/* Phones show the short labels: the long ones overflowed the bar */}
         <div className="navbar-link">
           <Link to="/" aria-label="Back to the BleachDex">
