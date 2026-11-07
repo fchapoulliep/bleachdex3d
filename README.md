@@ -68,7 +68,7 @@ src/
   components/                  dex page, cards, character page and 3D viewer
   css/                         stylesheets
   data/bleachcharacters.json   character list (id, name, society, races, description)
-  assets/                      logo, font, card art, arrows
+  assets/                      logo, fonts (Cinzel, Cormorant Garamond, with their OFL licences), card art, arrows
 ```
 
 ## Notes

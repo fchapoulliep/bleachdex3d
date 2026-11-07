@@ -1,12 +1,56 @@
+/* Cinzel for the names (Roman capitals, solemn, close to Bleach's titles),
+   Cormorant Garamond for the rest; both under the SIL Open Font License
+   (the licences sit beside the files), latin subset. They replaced a
+   commercial font (2026-11-07). Cormorant's small x-height read about 15 %
+   smaller than the old font at the same size: size-adjust scales it once
+   for every text. */
 @font-face {
-  font-family: "Hiragino";
-  src: url("../assets/fonts/Hiragino.otf") format("opentype");
-  font-weight: normal;
+  font-family: "Cinzel";
+  src: url("../assets/fonts/Cinzel.woff2") format("woff2");
+  font-weight: 500 700;
   font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Cormorant Garamond";
+  src: url("../assets/fonts/CormorantGaramond.woff2") format("woff2");
+  font-weight: 500 600;
+  font-style: normal;
+  font-display: swap;
+  size-adjust: 115%;
+}
+
+@font-face {
+  font-family: "Cormorant Garamond";
+  src: url("../assets/fonts/CormorantGaramond-Italic.woff2") format("woff2");
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+  size-adjust: 115%;
 }
 
 * {
-  font-family: "Hiragino", sans-serif;
+  font-family: "Cormorant Garamond", serif;
+}
+
+/* the names: on the cards and on the character page */
+.inner-element > a > p,
+#bleach-overlay .bleach-description h2 {
+  font-family: "Cinzel", serif;
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+}
+
+.inner-element > a > p {
+  font-size: 18px;
+}
+
+/* Cormorant's figures are old-style and of unequal widths: the clock would
+   change width every second */
+.navbar-time {
+  font-variant-numeric: lining-nums tabular-nums;
 }
 
 body,
