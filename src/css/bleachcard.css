@@ -8,35 +8,53 @@
   color: white;
   border-radius: 20px;
   transform-style: preserve-3d;
-  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(245, 242, 238, 0.07);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.6);
   transition: height 0.3s ease-in-out;
   max-height: 550px;
 }
 
-.bleach-cards {
-  background-repeat: no-repeat;
-  background-position: center left;
-  background-size: 160%;
+/* The faction symbol, drawn as a mask in a translucent tint of the
+   faction's accent (the SVGs carry fills of their own, tuned to the old
+   grey cards) */
+.bleach-cards::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  pointer-events: none;
+  background-color: var(--symbol-tint);
+  -webkit-mask: var(--symbol) no-repeat center left / 160%;
+  mask: var(--symbol) no-repeat center left / 160%;
 }
 
+/* each faction: card, symbol tint, accent (labels, active ring) */
 .bleach-cards.soul-society {
-  background-color: #34495e;
-  background-image: url("../assets/card-types/soul-society.svg");
+  background-color: #1a1213;
+  --symbol: url("../assets/card-types/soul-society.svg");
+  --symbol-tint: rgba(200, 16, 46, 0.22);
+  --accent: #f2627a;
 }
 
 .bleach-cards.hueco-mundo {
-  background-color: #5c5c5c;
-  background-image: url("../assets/card-types/hueco-mundo.svg");
+  background-color: #191816;
+  --symbol: url("../assets/card-types/hueco-mundo.svg");
+  --symbol-tint: rgba(216, 210, 196, 0.12);
+  --accent: #d8d2c4;
 }
 
 .bleach-cards.karakura-town {
-  background-color: #3b5998;
-  background-image: url("../assets/card-types/karakura-town.svg");
+  background-color: #1c1610;
+  --symbol: url("../assets/card-types/karakura-town.svg");
+  --symbol-tint: rgba(240, 138, 36, 0.18);
+  --accent: #f08a24;
 }
 
 .bleach-cards.wandenreich {
-  background-color: #3a3a3a;
-  background-image: url("../assets/card-types/wandenreich.svg");
+  background-color: #11151d;
+  --symbol: url("../assets/card-types/wandenreich.svg");
+  --symbol-tint: rgba(143, 184, 255, 0.16);
+  --accent: #8fb8ff;
 }
 
 .inner-element {
@@ -46,7 +64,7 @@
   align-items: center;
   font-size: 20px;
   font-style: italic;
-  color: white;
+  color: var(--bone);
   transform: translateZ(60px);
   height: 100%;
   width: 100%;
@@ -75,6 +93,7 @@
   gap: 5px;
   font-size: 10px;
   width: 100%;
+  color: var(--accent);
 }
 
 .inner-element .bleach-types img {

@@ -34,6 +34,29 @@
   font-family: "Cormorant Garamond", serif;
 }
 
+/* "Bankai" palette (2026-11-07): black and crimson, the cards nearly black
+   with their faction's colour as an accent (white text at 16:1). The red
+   bar it replaces left the red logo at 1.2:1. */
+:root {
+  --night: #0c0c0e;
+  --night-bar: #08080a;
+  --night-glow: #2a0d12;
+  --crimson: #c8102e;
+  --bone: #f5f2ee;
+  --field: #17141a;
+  --field-line: #33282a;
+}
+
+body {
+  background-color: var(--night);
+}
+
+/* Swiper sets --swiper-theme-color on :root in its own sheet, loaded after
+   this one; its arrows read --swiper-navigation-color first */
+.swiper {
+  --swiper-navigation-color: var(--crimson);
+}
+
 /* the names: on the cards and on the character page */
 .inner-element > a > p,
 #bleach-overlay .bleach-description h2 {
@@ -76,16 +99,16 @@ a:hover {
 }
 
 ::-webkit-scrollbar-track {
-  background: linear-gradient(#f2a30b 60px, transparent 60px);
+  background: linear-gradient(var(--night-bar) 60px, transparent 60px);
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #f2a30b;
+  background-color: var(--crimson);
   border-radius: 10px;
   border: 3px solid transparent;
   background-clip: content-box;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background-color: #b87800;
+  background-color: #8f0b21;
 }

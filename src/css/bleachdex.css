@@ -3,6 +3,7 @@
   align-items: center;
   width: 100%;
   flex-direction: column;
+  background: radial-gradient(ellipse 75% 65% at 50% 45%, var(--night-glow) 0%, var(--night) 70%);
 }
 
 #bleachdex-navbar {
@@ -10,7 +11,8 @@
   height: 60px;
   top: 0;
   width: 100%;
-  background-color: #A71F36;
+  background-color: var(--night-bar);
+  border-bottom: 2px solid var(--crimson);
   z-index: 1000;
   display: flex;
   flex-direction: row;
@@ -34,6 +36,9 @@
   height: 85%;
   max-height: 85%;
   transition: height 0.3s ease-in-out;
+  /* ringed and lit in its faction's colour */
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent), 0 20px 44px rgba(0, 0, 0, 0.65), 0 0 46px -8px var(--accent);
 }
 
 @keyframes fadeIn {
@@ -44,7 +49,8 @@
 }
 
 #search-bar {
-  border: 2px solid #ccc;
+  border: 2px solid var(--field-line);
+  background-color: var(--field);
   border-radius: 25px;
   min-width: 220px;
   max-width: 100%;
@@ -54,7 +60,7 @@
 }
 
 #search-bar:focus-within {
-  border-color: rgb(0, 0, 0);
+  border-color: var(--crimson);
 }
 
 #search-bar input {
@@ -63,6 +69,12 @@
   padding: 8px;
   border: none;
   outline: none;
+  background-color: var(--field);
+  color: var(--bone);
+}
+
+#search-bar input::placeholder {
+  color: #9a8f92;
 }
 
 #search-bar select {
@@ -70,7 +82,9 @@
   flex: 0 0 30%;
   padding: 8px;
   border: none;
-  border-left: 2px solid #ccc;
+  border-left: 2px solid var(--field-line);
+  background-color: var(--field);
+  color: var(--bone);
 }
 
 @media screen and (max-width: 768px) {
