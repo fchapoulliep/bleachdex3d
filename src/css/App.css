@@ -47,6 +47,20 @@
   --field-line: #33282a;
 }
 
+/* Colours of the first-visit guide (see onboarding.css) */
+:root {
+  --ob-dim: rgba(8, 8, 10, 0.82);
+  --ob-ring: var(--crimson);
+  --ob-box-bg: var(--night);
+  --ob-box-text: var(--bone);
+  --ob-box-border: 1px solid var(--crimson);
+  --ob-box-radius: 2px;
+  --ob-box-shadow: 0 0 0 4px var(--night), 0 0 0 5px var(--field-line), 0 12px 40px rgba(0, 0, 0, 0.6);
+  --ob-button: var(--bone);
+  --ob-button-font: "Cinzel", serif;
+  --ob-arrow: var(--crimson);
+}
+
 body {
   background-color: var(--night);
 }

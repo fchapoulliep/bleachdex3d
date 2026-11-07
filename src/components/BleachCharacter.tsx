@@ -13,6 +13,7 @@ import {
 } from "@react-three/drei";
 import bleachList from "../data/bleachcharacters.json";
 import Loader from "./Loader";
+import Onboarding from "./Onboarding";
 import * as THREE from "three";
 import "../css/bleachcharacter.css";
 import BleachType from "./BleachType";
@@ -404,6 +405,15 @@ const BleachCharacter: React.FC<BleachProps> = ({ bleachId }) => {
           />
         </Suspense>
       </Canvas>
+      <Onboarding
+        step="model"
+        ready={modelDrawn}
+        text={{
+          mouse: `Drag to spin ${bleachcharacter.name} around, scroll to zoom in.`,
+          touch: `Swipe to spin ${bleachcharacter.name} around, pinch to zoom in.`,
+        }}
+        button="Let's go"
+      />
     </div>
   );
 };

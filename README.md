@@ -13,6 +13,7 @@ Live: https://fchapoulliep.github.io/bleachdex3d/
 - A page per character with its name, description, badges and a background matching its society
 - Interactive 3D viewer: drag to orbit, scroll to zoom, auto-rotation, camera fitted to the model, idle animation played on load
 - Previous and next arrows to step through the characters
+- A guide on the first visit: the page darkens around the centred card, then around the model on the first character page, and a dialogue box says to click the card, then to drag and zoom (remembered by the browser, once per dex)
 - Loading animation and a navigation bar with a live clock on the character page
 
 ## Tech Stack
